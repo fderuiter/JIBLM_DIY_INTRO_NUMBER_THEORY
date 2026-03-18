@@ -92,22 +92,22 @@ theorem int_associates_iff_eq_or_eq_neg {a b : Int} :
     · refine ⟨-1, by simp, ?_⟩
       simpa [hab]
 
-/-- Exercise 1.5: Every positive integer has the form `2q + r` with `r = 0` or `r = 1`. -/
-theorem int_pos_two_mul_add_zero_or_one {a : Int} (_ha : 0 < a) :
+/-- Exercise 1.5: Every integer has the form `2q + r` with `r = 0` or `r = 1`. -/
+theorem int_two_mul_add_zero_or_one {a : Int} :
     ∃ q r : Int, (r = 0 ∨ r = 1) ∧ a = 2 * q + r := by
   refine ⟨a / 2, a % 2, ?_, ?_⟩
   · simpa using Int.emod_two_eq_zero_or_one a
   · simpa [mul_comm, mul_left_comm, mul_assoc] using (Int.ediv_add_emod a 2).symm
 
-/-- Exercise 1.6: Every positive integer has the form `3q + r` with `r = 0`, `1`, or `2`. -/
-theorem int_pos_three_mul_add_zero_one_or_two {a : Int} (_ha : 0 < a) :
+/-- Exercise 1.6: Every integer has the form `3q + r` with `r = 0`, `1`, or `2`. -/
+theorem int_three_mul_add_zero_one_or_two {a : Int} :
     ∃ q r : Int, (r = 0 ∨ r = 1 ∨ r = 2) ∧ a = 3 * q + r := by
   refine ⟨a / 3, a % 3, ?_, ?_⟩
   · simpa using Int.emod_three_eq_zero_or_one_or_two a
   · simpa [mul_comm, mul_left_comm, mul_assoc] using (Int.ediv_add_emod a 3).symm
 
 /-- Exercise 1.7: Division algorithm in `ℤ` for positive divisor. -/
-theorem int_pos_division_algorithm {a b : Int} (_ha : 0 < a) (hb : 0 < b) :
+theorem int_division_algorithm {a b : Int} (hb : 0 < b) :
     ∃ q r : Int, 0 ≤ r ∧ r < b ∧ a = b * q + r := by
   refine ⟨a / b, a % b, Int.emod_nonneg a (ne_of_gt hb), Int.emod_lt_of_pos a hb, ?_⟩
   simpa [mul_comm, mul_left_comm, mul_assoc] using (Int.ediv_add_emod a b).symm
